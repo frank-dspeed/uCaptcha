@@ -4,41 +4,41 @@ import path from "path";
 import {IMAGES_FOLDER} from "../R.js";
 
 /**
- * @typedef {Object} currentPageItem
- * @property {String} id
- * @property {String} sequence_id
- * @property {String} sequence_index
- * @property {String} lat
- * @property {String} ing
- * @property {String} name
- * @property {String} lth_name
- * @property {String} th_name
- * @property {String} date_added
- * @property {String} timestamp
- * @property {String|Any} match_segment_id
- * @property {String} match_lat
- * @property {String} match_lng
- * @property {String} way_id
- * @property {String} shot_date
- * @property {String} heading
- * @property {String} headers
- * @property {String} gps_accuracy
- * @property {String} username
+ * @typedef {object} currentPageItem
+ * @property {string} id
+ * @property {string} sequence_id
+ * @property {string} sequence_index
+ * @property {string} lat
+ * @property {string} ing
+ * @property {string} name
+ * @property {string} lth_name
+ * @property {string} th_name
+ * @property {string} date_added
+ * @property {string} timestamp
+ * @property {string|any} match_segment_id
+ * @property {string} match_lat
+ * @property {string} match_lng
+ * @property {string} way_id
+ * @property {string} shot_date
+ * @property {string} heading
+ * @property {string} headers
+ * @property {string} gps_accuracy
+ * @property {string} username
  */
 
 /**
- * @typedef {Object} OSCResponse.status
- * @property {String} apiCode
- * @property {String} apiMessage
- * @property {Number} httpCode
- * @property {String} httpMessage
+ * @typedef {object} OSCResponse.status
+ * @property {string} apiCode
+ * @property {string} apiMessage
+ * @property {number} httpCode
+ * @property {string} httpMessage
  */
 //* @param {import('../types/OSCResponse.js').status} status
 /**
- * @typedef {Object} OSCResponse
+ * @typedef {object} OSCResponse
  * @property {OSCResponse.status} status
  * @property {Array.<currentPageItem>} currentPageItems
- * @property {Array.<String>} totalFilteredItems
+ * @property {Array.<string>} totalFilteredItems
 */
 
 import {randomBytes} from "./utils.js";
@@ -66,10 +66,10 @@ async function saveImage(filepath, uri) {
   });
 }
 /**
- * @typedef {Object} geoImageRequest
- * @property {Number} [lat]
- * @property {Number} [lng]
- * @property {Number} [radius]
+ * @typedef {object} geoImageRequest
+ * @property {number} [lat]
+ * @property {number} [lng]
+ * @property {number} [radius]
  */
 
 /** @type {geoImageRequest} geoImageRequestDefaults */
