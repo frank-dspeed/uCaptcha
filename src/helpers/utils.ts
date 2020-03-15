@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
-const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabc" +
+  "defghijklmnopqrstuvwxyz0123456789";
 
 export function randomBytes(length: number) {
   const bytes = crypto.randomBytes(length);

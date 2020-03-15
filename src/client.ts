@@ -1,5 +1,5 @@
-import createElement from "./util/createElement";
-import InitSession from "../../shared/fun/initializeSession";
+import createElement from "./shared/util/createElement";
+import InitSession from "./shared/fun/initializeSession";
 
 function uCaptchaBox(key: string) {
   const checkbox = createElement("div");
