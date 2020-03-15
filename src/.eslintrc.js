@@ -19,7 +19,6 @@ module.exports = {
     '@typescript-eslint'
   ],
   'rules': {
-    "require-jsdoc": "off",
     "quotes": ["error", "double"],
     "comma-dangle": "off" 
   },

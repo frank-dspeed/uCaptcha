@@ -10,7 +10,7 @@ app.use(express.json({
   limit: "128kb"
 }));
 
-import apis from "./routes/api";
+import apis from "./routes/api/index.js";
 app.use("/api", apis);
 
 import {fetchImagesJob, fetchImages} from "./helpers/fetchImagesJob";
