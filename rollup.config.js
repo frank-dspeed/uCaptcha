@@ -9,12 +9,12 @@ const typescriptOptions = {include: ["src/**/*", "../shared/**/*"]};
 if (!isProd) typescriptOptions.noEmitOnError = false;
 
 module.exports = {
-  input: "src/index.ts",
+  input: "src/server.ts",
   plugins: [
+    typescript(typescriptOptions),
     commonjs({extensions: [".js", ".ts"]}),
     resolve({extensions: [".js", ".ts"]}),
-    isProd && terser(),
-    typescript(typescriptOptions),
+    isProd && terser()
   ],
   output: {
     file: "dist/bundle.js",

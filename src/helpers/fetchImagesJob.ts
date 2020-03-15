@@ -11,21 +11,22 @@ import Jimp from "jimp";
 async function saveImage(filepath: string, uri: string) {
   return new Promise((resolve, reject)=>{
     Jimp.read(uri)
-      .then(image=>{
-        image
-          .crop(0, 0, 384, 384)
-          .write(filepath, (err)=>{
-            if(err)
-              reject(err);
-            else
-              resolve();
-          })
-      })
-  })
+        .then((image)=>{
+          image
+              .crop(0, 0, 384, 384)
+              .write(filepath, (err)=>{
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve();
+                }
+              });
+        });
+  });
 }
 
 export function fetchImages({lat=40.6971576, lng=-83.608754, radius=5000} = {}) {
-  console.log("Collecting images...")
+  console.log("Collecting images...");
   const requestBody = {
     lat,
     lng,

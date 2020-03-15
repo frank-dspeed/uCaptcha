@@ -1,4 +1,4 @@
-import pickRandomFile from "./pickRandomFile";
+import pickRandomFile from "./pickRandomFile.js";
 
 
 export default async function() {

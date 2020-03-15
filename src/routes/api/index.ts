@@ -1,7 +1,7 @@
 import express from "express";
-import initializer from "./initializeSession"
-import {randomBytes} from "../../helpers/utils";
-import InitSession from "../../../../shared/fun/initializeSession";
+import initializer from "./initializeSession.js"
+import {randomBytes} from "../../helpers/utils.js";
+import InitSession from "../../shared/fun/initializeSession.js";
 
 const router = express.Router()
 

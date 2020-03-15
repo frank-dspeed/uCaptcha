@@ -3,7 +3,7 @@ import path from "path";
 import Jimp from "jimp";
 import {promisify} from "util";
 
-import {IMAGES_FOLDER} from "../../R";
+import {IMAGES_FOLDER} from "../../R.js";
 
 const readdirAsync = promisify(fs.readdir);
 
