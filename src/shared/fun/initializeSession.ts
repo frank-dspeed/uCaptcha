@@ -1,41 +1,70 @@
-enum Indexes {
-  clientId = 0,
-  imageUrl
-}
+const Indexes = {
+  clientId: 0,
+  imageUrl: 1
+};
 
 export default class InitSession {
-  private _clientSessionId: string | undefined;
-  private _imageUrl: string | undefined;
-
-  set sessionId(id: string) {
-    if(id.length !== 8) throw Error("ClientID is not 8 characters");
-    this._clientSessionId = id;
+  constructor() {
+    /** @type {string | undefined} */
+    this._sessionId;
+    /** @type {string | undefined} */
+    this._imageUrl;
   }
 
-  get sessionId(): string  {
-    return this._clientSessionId!;
+  /**
+   * Set the session ID for the user
+   * @param {string} id
+   */
+  setSessionId(id) {
+    if (id.length !== 8) throw Error("ClientID is not 8 characters");
+    this._sessionId = id;
   }
 
-  set imageUrl(url: string) {
+  /**
+   * Get the session ID for the user
+   * @return {string}
+   */
+  getSessionId() {
+    return this._sessionId;
+  }
+
+  /**
+   * Set the image URL for the initial challenge
+   * @param {string} url
+   */
+  setImageUrl(url: string) {
     this._imageUrl = url;
   }
 
-  get imageUrl(): string {
-    return this._imageUrl!;
+  /**
+   * Get the image URL for the initial challenge
+   * @return {string}
+   */
+  getImageUrl() {
+    return this._imageUrl;
   }
 
-  serialize(): any[] {
-    if(!this._clientSessionId || !this._imageUrl) {
-      throw Error("Unable to serialize because missing field(s)")
+  /**
+   * Serialize the session into a JSON object
+   * @return {Array<any>}
+   */
+  serialize() {
+    if (!this._sessionId || !this._imageUrl) {
+      throw Error("Unable to serialize because missing field(s)");
     }
     const payload = [];
-    payload[Indexes.clientId] = this._clientSessionId;
+    payload[Indexes.clientId] = this._sessionId;
     payload[Indexes.imageUrl] = this._imageUrl;
 
     return payload;
   }
 
+  /**
+   * Deserialize session data from JSON object
+   * @param {Array<any>} payload
+   */
   deserialize(payload: any[]) {
-    
+    this.setSessionId(payload[Indexes.clientId]);
+    this.setImageUrl(payload[Indexes.imageUrl]);
   }
 }
