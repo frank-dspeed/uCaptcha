@@ -3,6 +3,7 @@
   "version": "0.0.0-pre1",
   "description": "Server for uCaptcha",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
     "server": "nodemon src/server.js",
     "dev": "NODE_ENV=development; rollup -c -w",
