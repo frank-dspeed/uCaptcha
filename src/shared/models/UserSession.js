@@ -1,36 +1,27 @@
-const Indexes = {
-  clientId: 0,
-  imageUrl: 1
-};
 
 /**
  * User session model
-*/
-export default class Session {
+ * @type {Object} Session Represents a Session Object.
+ * @property {string | undefined} _sessionIds Internal The Id of the Session
+ * @property {string | undefined} _imageUrl Internal The Image Url
+ * @property {string | undefined} imageUrl Public The Image Url
+ * @property {string | undefined} sessionId Public The Image Url
+ */
+export class Session {
   /**
-   * User session model
-   */
-  constructor() {
-    /** @type {string | undefined} */
-    this._sessionId;
-    /** @type {string | undefined} */
-    this._imageUrl;
-  }
-
-  /**
-   * Set the session ID for the user
+   * Set the Session._sessionId
    * @param {string} id
    */
-  setSessionId(id) {
+  set sessionId(id) {
     if (id.length !== 8) throw Error("ClientID is not 8 characters");
     this._sessionId = id;
   }
 
   /**
-   * Get the session ID for the user
-   * @return {string}
+   * Get the session ID
+   * @type {string}
    */
-  getSessionId() {
+  get sessionId() {
     return this._sessionId;
   }
 
@@ -38,15 +29,15 @@ export default class Session {
    * Set the image URL for the initial challenge
    * @param {string} url
    */
-  setImageUrl(url) {
+  set imageUrl(url) {
     this._imageUrl = url;
   }
 
   /**
    * Get the image URL for the initial challenge
-   * @return {string}
+   * @type {string}
    */
-  getImageUrl() {
+  get imageUrl() {
     return this._imageUrl;
   }
 
@@ -55,22 +46,21 @@ export default class Session {
    * @return {Array<any>}
    */
   serialize() {
-    if (!this._sessionId || !this._imageUrl) {
+    const {sessionId, imageUrl} = this;
+    if (!sessionId || !imageUrl) {
       throw Error("Unable to serialize because of missing field(s)");
     }
-    const payload = [];
-    payload[Indexes.clientId] = this._sessionId;
-    payload[Indexes.imageUrl] = this._imageUrl;
-
-    return payload;
+    return [sessionId, imageUrl];
   }
 
   /**
    * Deserialize session data from JSON object
    * @param {Array<any>} payload
    */
-  deserialize(payload) {
-    this.setSessionId(payload[Indexes.clientId]);
-    this.setImageUrl(payload[Indexes.imageUrl]);
+  deserialize([sessionId, imageUrl]) {
+    Object.assign(this, {sessionId, imageUrl});
   }
 };
+
+export default Session
+;
