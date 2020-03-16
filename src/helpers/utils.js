@@ -1,7 +1,7 @@
-import crypto from "crypto";
+import crypto from 'crypto';
 
-const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabc" +
-  "defghijklmnopqrstuvwxyz0123456789";
+const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabc' +
+  'defghijklmnopqrstuvwxyz0123456789';
 
 /**
  * Produce a string of n length consisting of alphanumeric characters
@@ -16,7 +16,7 @@ function randomBytes(length) {
     chars.push(alphabets[bytes[i] % alphabets.length]);
   }
 
-  return chars.join("");
+  return chars.join('');
 }
 
 

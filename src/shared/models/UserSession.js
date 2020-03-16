@@ -13,7 +13,7 @@ export class Session {
    * @param {string} id
    */
   set sessionId(id) {
-    if (id.length !== 8) throw Error("ClientID is not 8 characters");
+    if (id.length !== 8) throw Error('ClientID is not 8 characters');
     this._sessionId = id;
   }
 
@@ -48,7 +48,7 @@ export class Session {
   serialize() {
     const {sessionId, imageUrl} = this;
     if (!sessionId || !imageUrl) {
-      throw Error("Unable to serialize because of missing field(s)");
+      throw Error('Unable to serialize because of missing field(s)');
     }
     return [sessionId, imageUrl];
   }

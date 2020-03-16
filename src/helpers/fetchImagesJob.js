@@ -1,10 +1,10 @@
-import cron from "cron";
+import cron from 'cron';
 const CronJob = cron.CronJob;
-import request from "request";
-import path from "path";
-import {IMAGES_FOLDER} from "../R.js";
-import {randomBytes} from "./utils.js";
-import Jimp from "jimp";
+import request from 'request';
+import path from 'path';
+import {IMAGES_FOLDER} from '../R.js';
+import {randomBytes} from './utils.js';
+import Jimp from 'jimp';
 
 
 /**
@@ -77,7 +77,7 @@ async function saveImage(filepath, uri) {
 const geoImageRequestDefaults = {
   lat: 40.6971576,
   lng: -83.608754,
-  radius: 5000
+  radius: 5000,
 };
 
 /**
@@ -85,12 +85,12 @@ const geoImageRequestDefaults = {
  * @param {geoImageRequest} [geoImageRequest] - Optional set a geoImageReqest
  */
 export function fetchImages(geoImageRequest) {
-  console.log("Collecting images...");
+  console.log('Collecting images...');
   const formData = {
     ...geoImageRequestDefaults,
-    ...geoImageRequest
+    ...geoImageRequest,
   };
-  request("https://openstreetcam.org/1.0/list/nearby-photos/", {formData, method: "POST"}, async (apiError, _, body) => {
+  request('https://openstreetcam.org/1.0/list/nearby-photos/', {formData, method: 'POST'}, async (apiError, _, body) => {
     if (apiError) throw apiError;
     /** @type {OSCResponse} */
     const json = JSON.parse(body);
@@ -102,12 +102,12 @@ export function fetchImages(geoImageRequest) {
   });
 }
 
-export const fetchImagesJob = new CronJob("0 0 0 * * *", () => {
+export const fetchImagesJob = new CronJob('0 0 0 * * *', () => {
   fetchImages(geoImageRequestDefaults);
 }, null, true);
 
 
 export default {
   fetchImages,
-  fetchImagesJob
+  fetchImagesJob,
 };

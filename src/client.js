@@ -1,4 +1,4 @@
-import UserSession from "./shared/models/UserSession.js";
+import UserSession from './shared/models/UserSession.js';
 
 /**
  * Create a uCaptcha box
@@ -6,8 +6,8 @@ import UserSession from "./shared/models/UserSession.js";
  * @return {HTMLElement} uCaptcha box
  */
 function uCaptchaBox(key) {
-  const checkbox = createElement("div", {
-    style: "cursor:pointer;border-radius:3px;border:2px solid #888;width:25px;height:25px;display:inline-block"
+  const checkbox = createElement('div', {
+    style: 'cursor:pointer;border-radius:3px;border:2px solid #888;width:25px;height:25px;display:inline-block',
   });
   checkbox.onclick = function() {
     fetch(`https://localhost:444/api/init?k=${key}`)
@@ -19,10 +19,10 @@ function uCaptchaBox(key) {
           session.deserialize(resp);
         });
 
-    checkbox.setAttribute("style",
-        checkbox.getAttribute("style") + "background-color:royalblue;");
+    checkbox.setAttribute('style',
+        checkbox.getAttribute('style') + 'background-color:royalblue;');
   };
-  const captchaBox = createElement("div");
+  const captchaBox = createElement('div');
   captchaBox.appendChild(checkbox);
   return captchaBox;
 }
@@ -47,7 +47,8 @@ export function create(websiteKey, selector) {
  */
 function createElement(tagName, attributes={}) {
   const elem = document.createElement(tagName);
-  for(const [name, value] of Object.entries(attributes)) {
+  for (const [name, value] of Object.entries(attributes)) {
     elem.setAttribute(name, value);
-  } 
+  }
+  return elem;
 }

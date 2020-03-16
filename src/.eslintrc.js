@@ -15,8 +15,5 @@ module.exports = {
     "sourceType": "module",
   },
   "plugins": [],
-  "rules": {
-    "quotes": ["error", "double"],
-    "comma-dangle": "off" 
-  },
+  "rules": {},
 };
