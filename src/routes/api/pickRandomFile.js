@@ -1,16 +1,15 @@
-const fs = require("fs");
-const path = require("path");
-const Jimp = require("jimp");
-const {promisify} = require("util");
-
-const {IMAGES_FOLDER} = require("../../R.js");
+import fs from "fs";
+import path from "path";
+import Jimp from "jimp";
+import {promisify} from "util";
+import {IMAGES_FOLDER} from "../../R.js";
 
 const readdirAsync = promisify(fs.readdir);
 
 /**
  * @return {string} Image file path
  */
-module.exports = async function() {
+export default async () => {
   const files = await readdirAsync(IMAGES_FOLDER);
 
   return files[Math.floor(Math.random() * files.length)];

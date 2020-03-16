@@ -3,7 +3,10 @@ const Indexes = {
   imageUrl: 1
 };
 
-module.exports = class Session {
+/**
+ * User session model
+*/
+export default class Session {
   /**
    * User session model
    */

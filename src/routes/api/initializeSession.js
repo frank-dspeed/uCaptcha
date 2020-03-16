@@ -1,13 +1,15 @@
-const pickRandomFile = require("./pickRandomFile.js");
-const UserSession = require("../../shared/models/UserSession.js");
-const utils = require("../../helpers/utils.js");
-
+/**
+ * TODO: this code should maybe be the constructor of a session model
+ */
+import pickRandomFile from "./pickRandomFile.js";
+import UserSession from "../../shared/models/UserSession.js";
+import {randomBytes} from "../../helpers/utils.js";
 
 /**
  * @return {any}
  */
-module.exports = async function() {
-  const randomSessionId = utils.randomBytes(8);
+export async function initializer() {
+  const randomSessionId = randomBytes(8);
   const imageFilepath = await pickRandomFile();
 
   const initSession = new UserSession();
