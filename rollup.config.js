@@ -1,5 +1,4 @@
 import {terser} from "rollup-plugin-terser";
-import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 
@@ -9,15 +8,14 @@ const typescriptOptions = {include: ["src/**/*", "../shared/**/*"]};
 if (!isProd) typescriptOptions.noEmitOnError = false;
 
 module.exports = {
-  input: "src/server.ts",
+  input: "src/client.js",
   plugins: [
-    typescript(typescriptOptions),
-    commonjs({extensions: [".js", ".ts"]}),
-    resolve({extensions: [".js", ".ts"]}),
+    commonjs(),
+    resolve(),
     isProd && terser()
   ],
   output: {
-    file: "dist/bundle.js",
+    file: "dist/client/bundle.js",
     name: "ucaptcha",
     format: "iife"
   }

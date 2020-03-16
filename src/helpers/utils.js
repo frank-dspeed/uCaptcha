@@ -1,9 +1,14 @@
-import crypto from "crypto";
+const crypto = require("crypto");
 
 const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabc" +
   "defghijklmnopqrstuvwxyz0123456789";
 
-export function randomBytes(length: number) {
+/**
+ * Produce a string of n length consisting of alphanumeric characters
+ * @param {number} length
+ * @return {string} Alphanumeric string
+ */
+function randomBytes(length) {
   const bytes = crypto.randomBytes(length);
   const chars = [];
 
@@ -13,3 +18,8 @@ export function randomBytes(length: number) {
 
   return chars.join("");
 }
+
+
+module.exports = {
+  randomBytes
+};
