@@ -1,7 +1,10 @@
-import {CronJob} from "cron";
-import request from "request";
-import path from "path";
-import {IMAGES_FOLDER} from "../R.js";
+const {CronJob} = require("cron");
+const request = require("request");
+const path = require("path");
+const {IMAGES_FOLDER} = require("../R.js");
+const {randomBytes} = require("./utils.js");
+const Jimp = require("jimp");
+
 
 /**
  * @typedef {object} currentPageItem
@@ -33,7 +36,7 @@ import {IMAGES_FOLDER} from "../R.js";
  * @property {number} httpCode
  * @property {string} httpMessage
  */
-//* @param {import('../types/OSCResponse.js').status} status
+// * @param {import('../types/OSCResponse.js').status} status
 /**
  * @typedef {object} OSCResponse
  * @property {OSCResponse.status} status
@@ -41,11 +44,8 @@ import {IMAGES_FOLDER} from "../R.js";
  * @property {Array.<string>} totalFilteredItems
 */
 
-import {randomBytes} from "./utils.js";
-import Jimp from "jimp";
-
 /**
- * saves a image to disk
+ * Save an image to disk
  * @param {string} filepath
  * @param {string} uri
  */
@@ -83,7 +83,7 @@ const geoImageRequestDefaults = {
  * fetch and saves image from nearby photos
  * @param {geoImageRequest} [geoImageRequest] - Optional set a geoImageReqest
  */
-export function fetchImages(geoImageRequest) {
+function fetchImages(geoImageRequest) {
   console.log("Collecting images...");
   const formData = {
     ...geoImageRequestDefaults,
@@ -101,6 +101,12 @@ export function fetchImages(geoImageRequest) {
   });
 }
 
-export const fetchImagesJob = new CronJob("0 0 0 * * *", () => {
+const fetchImagesJob = new CronJob("0 0 0 * * *", () => {
   fetchImages(geoImageRequestDefaults);
 }, null, true);
+
+
+module.exports = {
+  fetchImages,
+  fetchImagesJob
+};

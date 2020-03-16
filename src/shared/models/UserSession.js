@@ -3,7 +3,10 @@ const Indexes = {
   imageUrl: 1
 };
 
-export default class InitSession {
+module.exports = class Session {
+  /**
+   * User session model
+   */
   constructor() {
     /** @type {string | undefined} */
     this._sessionId;
@@ -50,7 +53,7 @@ export default class InitSession {
    */
   serialize() {
     if (!this._sessionId || !this._imageUrl) {
-      throw Error("Unable to serialize because missing field(s)");
+      throw Error("Unable to serialize because of missing field(s)");
     }
     const payload = [];
     payload[Indexes.clientId] = this._sessionId;
@@ -67,4 +70,4 @@ export default class InitSession {
     this.setSessionId(payload[Indexes.clientId]);
     this.setImageUrl(payload[Indexes.imageUrl]);
   }
-}
+};
