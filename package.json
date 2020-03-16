@@ -1,6 +1,6 @@
 {
   "name": "ucaptcha",
-  "version": "0.0.0-pre1",
+  "version": "0.0.0-pre2",
   "description": "Server for uCaptcha",
   "main": "src/server.js",
   "type": "module",
