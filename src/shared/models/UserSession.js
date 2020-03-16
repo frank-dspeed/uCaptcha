@@ -1,15 +1,13 @@
-/** @typedef {Object} Session Represents a Session Object.
+
+/**
+ * User session model
+ * @type {Object} Session Represents a Session Object.
  * @property {string | undefined} _sessionIds Internal The Id of the Session
  * @property {string | undefined} _imageUrl Internal The Image Url
  * @property {string | undefined} imageUrl Public The Image Url
  * @property {string | undefined} sessionId Public The Image Url
  */
-
-/**
- * User session model
- * @type {Session}
- */
-module.exports = class Session {
+export class Session {
   /**
    * Set the Session._sessionId
    * @param {string} id
@@ -63,3 +61,6 @@ module.exports = class Session {
     Object.assign(this, {sessionId, imageUrl});
   }
 };
+
+export default Session
+;

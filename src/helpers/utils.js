@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 
 const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabc" +
   "defghijklmnopqrstuvwxyz0123456789";
@@ -20,6 +20,4 @@ function randomBytes(length) {
 }
 
 
-module.exports = {
-  randomBytes
-};
+export {randomBytes};

@@ -1,9 +1,10 @@
-const {CronJob} = require("cron");
-const request = require("request");
-const path = require("path");
-const {IMAGES_FOLDER} = require("../R.js");
-const {randomBytes} = require("./utils.js");
-const Jimp = require("jimp");
+import cron from "cron";
+const CronJob = cron.CronJob;
+import request from "request";
+import path from "path";
+import {IMAGES_FOLDER} from "../R.js";
+import {randomBytes} from "./utils.js";
+import Jimp from "jimp";
 
 
 /**
@@ -83,7 +84,7 @@ const geoImageRequestDefaults = {
  * fetch and saves image from nearby photos
  * @param {geoImageRequest} [geoImageRequest] - Optional set a geoImageReqest
  */
-function fetchImages(geoImageRequest) {
+export function fetchImages(geoImageRequest) {
   console.log("Collecting images...");
   const formData = {
     ...geoImageRequestDefaults,
@@ -94,19 +95,19 @@ function fetchImages(geoImageRequest) {
     /** @type {OSCResponse} */
     const json = JSON.parse(body);
     for (const item of (json).currentPageItems) {
-      const filepath = path.join(IMAGES_FOLDER, randomBytes(12) + ".jpg");
+      const filepath = path.join(IMAGES_FOLDER, `${randomBytes(12)}.jpg`);
       console.log(filepath);
       await saveImage(filepath, `https://openstreetcam.org/${item.lth_name}`);
     }
   });
 }
 
-const fetchImagesJob = new CronJob("0 0 0 * * *", () => {
+export const fetchImagesJob = new CronJob("0 0 0 * * *", () => {
   fetchImages(geoImageRequestDefaults);
 }, null, true);
 
 
-module.exports = {
+export default {
   fetchImages,
   fetchImagesJob
 };
