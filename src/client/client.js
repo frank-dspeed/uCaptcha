@@ -1,4 +1,4 @@
-import UserSession from './shared/models/UserSession.js';
+import UserSession from '../shared/models/UserSession.js';
 
 /**
  * Create a uCaptcha box

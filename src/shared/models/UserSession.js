@@ -1,15 +1,11 @@
-
 /**
  * User session model
- * @type {Object} Session Represents a Session Object.
- * @property {string | undefined} _sessionIds Internal The Id of the Session
- * @property {string | undefined} _imageUrl Internal The Image Url
- * @property {string | undefined} imageUrl Public The Image Url
- * @property {string | undefined} sessionId Public The Image Url
+ * @type {Object} Session Object.
+ * @property {string} _sessionId The session identifier
  */
-export class Session {
+export class UserSession {
   /**
-   * Set the Session._sessionId
+   * Set session ID
    * @param {string} id
    */
   set sessionId(id) {
@@ -26,41 +22,25 @@ export class Session {
   }
 
   /**
-   * Set the image URL for the initial challenge
-   * @param {string} url
-   */
-  set imageUrl(url) {
-    this._imageUrl = url;
-  }
-
-  /**
-   * Get the image URL for the initial challenge
-   * @type {string}
-   */
-  get imageUrl() {
-    return this._imageUrl;
-  }
-
-  /**
    * Serialize the session into a JSON object
    * @return {Array<any>}
    */
   serialize() {
-    const {sessionId, imageUrl} = this;
-    if (!sessionId || !imageUrl) {
+    const {sessionId} = this;
+    if (!sessionId) {
       throw Error('Unable to serialize because of missing field(s)');
     }
-    return [sessionId, imageUrl];
+    return [sessionId];
   }
 
   /**
    * Deserialize session data from JSON object
    * @param {Array<any>} payload
    */
-  deserialize([sessionId, imageUrl]) {
-    Object.assign(this, {sessionId, imageUrl});
+  deserialize([sessionId]) {
+    Object.assign(this, {sessionId});
   }
 };
 
-export default Session
+export default UserSession
 ;

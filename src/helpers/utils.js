@@ -19,5 +19,24 @@ function randomBytes(length) {
   return chars.join('');
 }
 
+/**
+ * Returns an array of indexes where element
+ * of `arr` is greater than `threshold`
+ * @param {Array<number>} arr
+ * @param {number} threshold
+ * @return {Array<number>}
+ */
+function argmaxThresh(arr, threshold) {
+  const indexes = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] >= threshold) {
+      indexes.push(i);
+    }
+  }
+  return indexes;
+}
 
-export {randomBytes};
+export {
+  randomBytes,
+  argmaxThresh,
+};

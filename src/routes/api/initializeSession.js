@@ -4,18 +4,35 @@
 import pickRandomFile from './pickRandomFile.js';
 import UserSession from '../../shared/models/UserSession.js';
 import {randomBytes} from '../../helpers/utils.js';
+import {client} from '../../helpers/idb.js';
+import {MAX_SESSION_TIME} from '../../R.js';
 
 /**
+ * @typedef {import('../../models/IDBSession.js').IDBSession} IDBSession
+ */
+
+
+/**
+ * @param {string} websiteKey
  * @return {any}
  */
-export async function initializer() {
+export default async function initializeSession(websiteKey) {
   const randomSessionId = randomBytes(8);
-  const imageFilepath = await pickRandomFile();
+  const image = await pickRandomFile();
 
-  const initSession = new UserSession();
-  initSession.setSessionId(randomSessionId);
-  initSession.setImageUrl(imageFilepath);
-  const payload = initSession.serialize();
+  const session = new UserSession();
+  session.sessionId = randomSessionId;
+  const userPayload = session.serialize();
 
-  return payload;
+  /** @type {IDBSession} */
+  const idbPayload = {
+    sessionId: session.sessionId,
+    image,
+    score: 0.5,
+  };
+
+  client.setex(
+      session.sessionId, MAX_SESSION_TIME, JSON.stringify(idbPayload));
+
+  return userPayload;
 };

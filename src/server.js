@@ -13,14 +13,30 @@ app.use(express.json({
   limit: '128kb',
 }));
 
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, _res, next)=>{
+    console.log(`${req.method} ${req.url}`);
+    next();
+  });
+}
+
 import apis from './routes/api/index.js';
 app.use('/api', apis);
 
-import {fetchImagesJob, fetchImages} from './helpers/fetchImagesJob.js';
+// import {fetchImagesJob} from './helpers/fetchImagesJob.js';
+// import {fetchImages} from './helpers/fetchImagesJob.js';
 
-app.listen(8080, ()=>{
-  fetchImagesJob.start();
-  // fetchImages({radius: 1000});
-  console.log('Server started');
-  console.log('=========================================================');
+import {connect as connectToIdb} from './helpers/idb.js';
+
+connectToIdb((err)=>{
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  app.listen(8080, ()=>{
+    // fetchImagesJob.start();
+    // fetchImages({radius: 500});
+    console.log('Server started');
+    console.log('=========================================================');
+  });
 });

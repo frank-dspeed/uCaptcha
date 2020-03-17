@@ -54,8 +54,15 @@ async function saveImage(filepath, uri) {
   return new Promise((resolve, reject)=>{
     Jimp.read(uri)
         .then((image)=>{
+          let x;
+          if (image.getWidth() / 2 < 400) {
+            x = 0;
+          } else {
+            x = image.getWidth() / 2 - 200;
+          }
+          const y = image.getHeight() - 400;
           image
-              .crop(0, 0, 384, 384)
+              .crop(x, y, 384, 384)
               .write(filepath, (err)=>{
                 if (err) {
                   reject(err);
@@ -75,8 +82,8 @@ async function saveImage(filepath, uri) {
 
 /** @type {geoImageRequest} geoImageRequestDefaults */
 const geoImageRequestDefaults = {
-  lat: 40.6971576,
-  lng: -83.608754,
+  lat: 40.624592,
+  lng: -81.785149,
   radius: 5000,
 };
 
