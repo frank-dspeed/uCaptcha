@@ -11,6 +11,7 @@ import {client} from '../../helpers/idb.js';
 export default function(sessionId) {
   return new Promise((resolve, reject)=>{
     client.get(sessionId, (err, result)=>{
+      // FIXME: `result` is sometimes null on a perfect query
       if (err) return reject(err);
 
       /** @type {IDBSession} */

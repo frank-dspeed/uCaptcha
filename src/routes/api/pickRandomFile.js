@@ -5,7 +5,7 @@ import {IMAGES_FOLDER} from '../../R.js';
  * @return {Promise<string>} Image file without extension
  */
 export default () => {
-  return new Promise((reject, resolve)=>{
+  return new Promise((resolve, reject)=>{
     fs.readdir(IMAGES_FOLDER, (err, files)=>{
       if (err) return reject(err);
       return resolve(

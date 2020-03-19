@@ -14,19 +14,34 @@ import {MAX_SESSION_TIME} from '../../R.js';
 
 /**
  * @param {string} websiteKey
- * @return {any}
+ * @param {Object} cookies
+ * @return {UserSession}
  */
-export default async function initializeSession(websiteKey) {
-  const randomSessionId = randomBytes(8);
+export default async function initializeSession(websiteKey, cookies) {
+  let randomSessionId;
+
+  if (cookies[websiteKey]) {
+    randomSessionId = cookies[websiteKey];
+
+    const session = new UserSession();
+    session.sessionId = randomSessionId;
+    session.websiteKey = websiteKey;
+
+    return session;
+  } else {
+    randomSessionId = randomBytes(8);
+  }
+
   const image = await pickRandomFile();
 
   const session = new UserSession();
   session.sessionId = randomSessionId;
-  const userPayload = session.serialize();
+  session.websiteKey = websiteKey;
 
   /** @type {IDBSession} */
   const idbPayload = {
     sessionId: session.sessionId,
+    websiteKey: session.websiteKey,
     image,
     score: 0.5,
   };
@@ -34,5 +49,5 @@ export default async function initializeSession(websiteKey) {
   client.setex(
       session.sessionId, MAX_SESSION_TIME, JSON.stringify(idbPayload));
 
-  return userPayload;
+  return session;
 };

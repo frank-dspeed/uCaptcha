@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon src/server.js",
+    "server": "nodemon src/server.js --ignore dev/ --ignore public/ --ignore src/client/",
     "dev": "NODE_ENV=development; rollup -c -w",
     "build": "NODE_ENV=production; rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"

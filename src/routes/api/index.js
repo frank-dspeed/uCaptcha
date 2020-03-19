@@ -6,19 +6,26 @@ import serveImage from './serveImage.js';
 import verifyImage from './verifyImage.js';
 
 import sendJson from '../../helpers/sendJson.js';
-import {IMAGES_FOLDER} from '../../R.js';
+import {IMAGES_FOLDER, MAX_SESSION_TIME} from '../../R.js';
 
 const router = new express.Router();
 
 router.get('/init', async (req, res)=>{
-  const websiteKey = req.query.k;
-  if (!websiteKey) {
-    res.end();
-    return;
-  }
+  try {
+    const websiteKey = req.query.k;
+    if (!websiteKey) {
+      res.end();
+      return;
+    }
 
-  const result = await initializeSession(websiteKey);
-  sendJson(res, result);
+    const session = await initializeSession(websiteKey, req.cookies);
+    res.cookie(websiteKey, session.sessionId,
+        {httpOnly: true, maxAge: MAX_SESSION_TIME * 1000});
+    sendJson(res, session.serialize());
+  } catch (e) {
+    console.error(e);
+    res.end();
+  }
 });
 
 router.get('/image', async (req, res)=>{
@@ -40,8 +47,12 @@ router.get('/image', async (req, res)=>{
 router.post('/verify', async (req, res)=>{
   const sessionId = req.body.s;
   const mat = req.body.mat;
+  console.log(req.body);
 
   await verifyImage(sessionId, mat);
+  sendJson(res, {
+    ok: 1,
+  });
 });
 
 export default router;
