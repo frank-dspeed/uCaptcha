@@ -1,5 +1,5 @@
 import request from '../util/request.js';
-import UserSession from '../../shared/models/UserSession.js';
+import UserSession from '../../models/UserSession.js';
 
 /**
  * @param {string} websiteKey

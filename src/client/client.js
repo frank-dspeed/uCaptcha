@@ -60,7 +60,7 @@ function uCaptchaBox(websiteKey) {
   captchaBox.appendChild(btn);
 
   checkbox.onclick = async function() {
-    /** @type {import('../shared/models/UserSession.js').UserSession} */
+    /** @type {import('../models/UserSession.js').UserSession} */
     const session = await initializeSession(websiteKey);
 
     const imageGrid = createElement('table', {id: 'ucaptcha-grid'});
