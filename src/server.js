@@ -25,18 +25,4 @@ app.use('/api', apis);
 
 // import {fetchImagesJob} from './helpers/fetchImagesJob.js';
 // import {fetchImages} from './helpers/fetchImagesJob.js';
-
-import {connect as connectToIdb} from './helpers/idb.js';
-
-connectToIdb((err)=>{
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-  app.listen(8080, ()=>{
-    // fetchImagesJob.start();
-    // fetchImages({radius: 500});
-    console.log('Server started');
-    console.log('=========================================================');
-  });
-});
+export {app};
