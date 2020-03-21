@@ -2,7 +2,7 @@
  * TODO: this code should maybe be the constructor of a session model
  */
 import pickRandomFile from './pickRandomFile.js';
-import UserSession from '../../shared/models/UserSession.js';
+import UserSession from '../../models/UserSession.js';
 import {randomBytes} from '../../helpers/utils.js';
 import {client} from '../../helpers/idb.js';
 import {MAX_SESSION_TIME} from '../../R.js';

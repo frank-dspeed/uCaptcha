@@ -2,13 +2,13 @@
   "name": "ucaptcha",
   "version": "0.0.0-pre2",
   "description": "Server for uCaptcha",
-  "main": "src/server.js",
+  "main": "src/start.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon src/server.js --ignore dev/ --ignore public/ --ignore src/client/",
+    "server": "nodemon src/start.js --ignore dev/ --ignore public/ --ignore src/client/",
     "dev": "NODE_ENV=development; rollup -c -w",
     "build": "NODE_ENV=production; rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test-server.js"
   },
   "keywords": [
     "Captcha",
