@@ -1,6 +1,7 @@
 import initializeSession from './helpers/initializeSession.js';
 import getImage from './helpers/getImage.js';
 import verifyImage from './helpers/verifyImage.js';
+import {cE as createElement} from './util/documnet.js';
 
 /**
  * Create a uCaptcha box
@@ -37,8 +38,12 @@ function uCaptchaBox(websiteKey) {
   document.head.appendChild(styleTag);
 
   const checkbox = createElement('div', {
-    style: 'cursor:pointer;border-radius:3px;border:2px solid #888;width:25px;height:25px;display:inline-block',
+    style: 'height:25px;display:inline-block',
   });
+  checkbox.style.cursor = 'pointer';
+  checkbox.style.borderRadius = '3px';
+  checkbox.style.border = '2px solid #888';
+  checkbox.style.width = '25px';
 
   const captchaBox = createElement('div');
   captchaBox.appendChild(checkbox);
@@ -99,16 +104,4 @@ export function create(websiteKey, selector) {
   document.querySelector(selector).appendChild(uCaptchaBox(websiteKey));
 }
 
-/**
- * Short hand for document.createElement
- * @param {string} tagName Tag name
- * @param {object} attributes A key-value pair of DOM attributes
- * @return {HTMLElement}
- */
-function createElement(tagName, attributes={}) {
-  const elem = document.createElement(tagName);
-  for (const [name, value] of Object.entries(attributes)) {
-    elem.setAttribute(name, value);
-  }
-  return elem;
-}
+
