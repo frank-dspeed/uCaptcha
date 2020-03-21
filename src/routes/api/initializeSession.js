@@ -15,7 +15,7 @@ import {MAX_SESSION_TIME} from '../../R.js';
 /**
  * @param {string} websiteKey
  * @param {Object} cookies
- * @return {UserSession}
+ * @return {Promise<UserSession>}
  */
 export default async function initializeSession(websiteKey, cookies) {
   let randomSessionId;

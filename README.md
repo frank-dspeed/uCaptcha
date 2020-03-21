@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/devshh/uCaptcha.svg?branch=master)](https://travis-ci.com/devshh/uCaptcha)
+
 # TODO
 Research --emitDeclarationOnly
 
