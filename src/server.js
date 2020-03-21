@@ -1,26 +1,42 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
-import express from "express";
+import express from 'express';
 const app = express();
 
-app.disable("x-powered-by");
+app.disable('x-powered-by');
 
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(express.json({
-  limit: "128kb"
+  limit: '128kb',
 }));
 
-import apis from "./routes/api/index.js";
-app.use("/api", apis);
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, _res, next)=>{
+    console.log(`${req.method} ${req.url}`);
+    next();
+  });
+}
 
-import {fetchImagesJob, fetchImages} from "./helpers/fetchImagesJob.js";
+import apis from './routes/api/index.js';
+app.use('/api', apis);
 
-app.listen(8080, ()=>{
-  fetchImagesJob.start();
-  // fetchImages({radius: 1000});
-  console.log("Server started");
-  console.log("=========================================================");
+// import {fetchImagesJob} from './helpers/fetchImagesJob.js';
+// import {fetchImages} from './helpers/fetchImagesJob.js';
+
+import {connect as connectToIdb} from './helpers/idb.js';
+
+connectToIdb((err)=>{
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  app.listen(8080, ()=>{
+    // fetchImagesJob.start();
+    // fetchImages({radius: 500});
+    console.log('Server started');
+    console.log('=========================================================');
+  });
 });

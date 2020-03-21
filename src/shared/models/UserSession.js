@@ -1,19 +1,15 @@
-
 /**
  * User session model
- * @type {Object} Session Represents a Session Object.
- * @property {string | undefined} _sessionIds Internal The Id of the Session
- * @property {string | undefined} _imageUrl Internal The Image Url
- * @property {string | undefined} imageUrl Public The Image Url
- * @property {string | undefined} sessionId Public The Image Url
+ * @type {Object} Session Object.
+ * @property {string} _sessionId The session identifier
+ * @property {string} _websiteKey The website id for session
  */
-export class Session {
+export class UserSession {
   /**
-   * Set the Session._sessionId
+   * Set session ID
    * @param {string} id
    */
   set sessionId(id) {
-    if (id.length !== 8) throw Error("ClientID is not 8 characters");
     this._sessionId = id;
   }
 
@@ -26,19 +22,19 @@ export class Session {
   }
 
   /**
-   * Set the image URL for the initial challenge
-   * @param {string} url
+   * Set session ID
+   * @param {string} id
    */
-  set imageUrl(url) {
-    this._imageUrl = url;
+  set websiteKey(id) {
+    this._websiteKey = id;
   }
 
   /**
-   * Get the image URL for the initial challenge
+   * Get the session ID
    * @type {string}
    */
-  get imageUrl() {
-    return this._imageUrl;
+  get websiteKey() {
+    return this._websiteKey;
   }
 
   /**
@@ -46,21 +42,21 @@ export class Session {
    * @return {Array<any>}
    */
   serialize() {
-    const {sessionId, imageUrl} = this;
-    if (!sessionId || !imageUrl) {
-      throw Error("Unable to serialize because of missing field(s)");
+    const {sessionId, websiteKey} = this;
+    if (!sessionId || !websiteKey) {
+      throw Error();
     }
-    return [sessionId, imageUrl];
+    return [sessionId, websiteKey];
   }
 
   /**
    * Deserialize session data from JSON object
    * @param {Array<any>} payload
    */
-  deserialize([sessionId, imageUrl]) {
-    Object.assign(this, {sessionId, imageUrl});
+  deserialize([sessionId, websiteKey]) {
+    Object.assign(this, {sessionId, websiteKey});
   }
 };
 
-export default Session
+export default UserSession
 ;

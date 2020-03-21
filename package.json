@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon src/server.js",
+    "server": "nodemon src/server.js --ignore dev/ --ignore public/ --ignore src/client/",
     "dev": "NODE_ENV=development; rollup -c -w",
     "build": "NODE_ENV=production; rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,7 +33,6 @@
     "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.2",
     "rollup": "^2.0.6",
-    "rollup-plugin-terser": "^5.3.0",
-    "typescript": "^3.8.3"
+    "rollup-plugin-terser": "^5.3.0"
   }
 }
