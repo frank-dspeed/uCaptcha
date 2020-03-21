@@ -2,7 +2,7 @@
  * @typedef {Object} RequestOptions
  * @property {Object<string, any>} [body] Request body
  * @property {string} [method] Request method
- * @property {XMLHttpRequestResponseType} [responseType] Return raw response from server
+ * @property {XMLHttpRequestResponseType} [responseType] raw response
  */
 
 /** @type {RequestOptions} */
@@ -14,12 +14,11 @@ const defaultOptions = {
 /**
  * Make an HTTP request
  * @param {string} url
- * @param {RequestOptions} options
- * @return {Promise}
+ * @param {RequestOptions} [userOptions]
+ * @return {Promise} reqestPromise
  */
-export default function(url, options) {
-  console.log(options);
-  options = Object.assign({}, defaultOptions, options);
+export async function request(url, userOptions={}) {
+  const options = Object.assign({}, defaultOptions, userOptions);
   console.log(options);
   return new Promise((resolve, reject)=>{
     const xhr = new XMLHttpRequest();
@@ -47,3 +46,4 @@ export default function(url, options) {
     }
   });
 }
+export default request;

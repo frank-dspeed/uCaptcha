@@ -1,5 +1,7 @@
-import request from './util/request.js';
-import UserSession from '../../shared/models/UserSession.js';
+import request from '../util/request.js';
+/**
+ * @typedef { import('../../models/UserSession.js').UserSession } UserSession
+ */
 
 /**
  * Instantiate the uCaptcha loop

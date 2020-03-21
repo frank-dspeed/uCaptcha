@@ -1,12 +1,16 @@
-import request from './util/request.js';
-import UserSession from '../../shared/models/UserSession.js';
+import request from '../util/request.js';
+
+/**
+ * @typedef { import('../../models/UserSession.js').UserSession } UserSession
+ */
+
 
 /**
  * Verify the image
  * @param {UserSession} session
  * @param {HTMLElement} captchaGrid
  */
-export default async function(session, captchaGrid) {
+export async function verfiyImage(session, captchaGrid) {
   const tds = captchaGrid.querySelectorAll('td');
   const selectedTds = [];
 
@@ -31,3 +35,5 @@ export default async function(session, captchaGrid) {
     td.classList.remove('selected');
   });
 }
+
+export default verfiyImage;
